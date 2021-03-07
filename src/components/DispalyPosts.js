@@ -32,12 +32,12 @@ class DisplayPosts extends Component {
               {" "}
               {new Date(post.createdAt).toDateString()}
             </time>
-            <p>{post.postBody}</p>
-            <br />
-            <span>
-              <DeletePost />
-              <EditPost />
-            </span>
+          </span>
+          <p>{post.postBody}</p>
+          <br />
+          <span>
+            <DeletePost />
+            <EditPost />
           </span>
         </div>
       )
