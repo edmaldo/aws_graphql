@@ -1,5 +1,6 @@
 import { API, graphqlOperation } from "aws-amplify"
 import React, { Component } from "react"
+import { createPost } from "../graphql/mutations"
 
 class CreatePost extends Component {
   state = {
@@ -10,6 +11,10 @@ class CreatePost extends Component {
   }
 
   componentDidMount = async () => {}
+
+  handleChangePost = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
 
   handleAddPost = async (event) => {
     event.preventDefault()
@@ -36,6 +41,8 @@ class CreatePost extends Component {
           placeholder="Title"
           name="postTitle"
           required
+          value={this.state.postTitle}
+          onChange={this.handleChangePost}
         />
 
         <textarea
@@ -45,6 +52,8 @@ class CreatePost extends Component {
           cols="40"
           required
           placeholder="New Blog Post"
+          vale={this.state.postTitle}
+          onChange={this.handleChangePost}
         />
 
         <input type="submit" className="btn" style={{ fontSize: "19px" }} />
