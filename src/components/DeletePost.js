@@ -2,7 +2,7 @@ import React, { Component } from "react"
 
 class DeletePost extends Component {
   render() {
-    return <button>Delete</button>
+    return <button stye={{ color: "red" }}>Delete</button>
   }
 }
 
