@@ -15,22 +15,21 @@ code {
 }
 
 .App {
-    max-width: 900px;
-    margin: 2rem auto 0 auto;
-    padding: 1rem;
-    background-color: rgb(255, 255, 255);
-    font-size: 1rem;
-    box-shadow: 1px 1px 9px 7px #36181833;
-    color: #282c34
-    
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  padding: 1rem;
+  background-color: rgb(255, 255, 255);
+  font-size: 1rem;
+  box-shadow: 1px 1px 9px 7px #36181833;
+  color: #282c34;
 }
 
 .container {
   padding: 0 1rem;
   text-align: right;
-  
 }
-input[type=text], select {
+input[type="text"],
+select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -40,9 +39,9 @@ input[type=text], select {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type="submit"] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -51,11 +50,11 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #45a049;
 }
 
-.add-post{
+.add-post {
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -63,47 +62,45 @@ input[type=submit]:hover {
   padding: 1rem;
 }
 
-
-.posts{
+.posts {
   display: flex;
   flex-direction: column;
   box-shadow: 1px 1px 9px 7px #36181833;
 
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
-
-.posts div{
+.posts div {
   box-shadow: 1px 1px 1px rgb(182, 235, 171);
-  padding: .5rem;
-  margin: .6rem;
+  padding: 0.5rem;
+  margin: 0.6rem;
   background-color: white;
 }
 
-.modal{
-   position: absolute;
-   top:40px;
-   right: 200px;
-   width: 60%;
-   height: 40%;
-   box-shadow: 4px 4px 4px rgb(114, 116, 114);
-   animation: move .2s backwards;
-}
-.modal-likes{
+.modal {
   position: absolute;
-  top:40px;
+  top: 40px;
   right: 200px;
   width: 60%;
   height: 40%;
   box-shadow: 4px 4px 4px rgb(114, 116, 114);
-  animation: move .2s backwards;
+  animation: move 0.2s backwards;
+}
+.modal-likes {
+  position: absolute;
+  top: 40px;
+  right: 200px;
+  width: 60%;
+  height: 40%;
+  box-shadow: 4px 4px 4px rgb(114, 116, 114);
+  animation: move 0.2s backwards;
 }
 div {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
 }
- .clean-area  {
+.clean-area {
   border-radius: 0px;
   background-color: #45a049;
 }
@@ -135,20 +132,21 @@ div {
   color: white;
 }
 
-.close{
-  width:40px;
+.close {
+  width: 40px;
   border-radius: 150px;
   float: right;
 }
-input,textarea{
-  margin: .3rem;
+input,
+textarea {
+  margin: 0.3rem;
   padding: 1rem;
   font-size: 1.2rem;
 }
-button{
-  width:30%;
+button {
+  width: 30%;
   background-color: rgb(49, 142, 248);
-  padding: .8rem;
+  padding: 0.8rem;
   font-weight: 500;
   border-radius: 4px;
   float: right;
@@ -166,23 +164,26 @@ button{
   padding: 2px;
 }
 .alert {
-   font-weight: 200;
+  font-weight: 200;
   color: crimson;
   font-style: italic;
   font-size: 14px;
 }
 .like-button {
-   font-weight: 600;
-   border-radius: 6;
-   padding: "8px";
-   color: rgb(80, 82, 80);
-   width: "40px";
-   font-style: italic;
-   cursor: pointer;
+  font-weight: 600;
+  border-radius: 6;
+  padding: "8px";
+  color: rgb(80, 82, 80);
+  width: "40px";
+  font-style: italic;
+  cursor: pointer;
 }
 
+div .Nav {
+  background-color: rgb(49, 142, 248);
+}
 
-button:hover{
+button:hover {
   background-color: rgba(9, 123, 216, 0.808);
 }
 
