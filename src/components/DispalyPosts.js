@@ -8,6 +8,7 @@ import {
   onDeletePost,
   onUpdatePost,
 } from "../graphql/subscriptions"
+import CreateCommentPost from "./CreateCommentPost"
 
 class DisplayPosts extends Component {
   state = {
@@ -94,6 +95,8 @@ class DisplayPosts extends Component {
             <DeletePost data={post} />
             <EditPost {...post} />
           </span>
+          <CreateCommentPost postId={post.id} />
+          <span></span>
         </div>
       )
     })
