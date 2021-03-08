@@ -74,7 +74,7 @@ class EditPost extends Component {
               onSubmit={(event) => this.handleUpdatePost(event)}
             >
               <input
-                style={{ fontSize: "19px" }}
+                style={{ fontSize: "24px" }}
                 type="text"
                 placeholder="Title"
                 name="postTitle"
@@ -82,7 +82,7 @@ class EditPost extends Component {
                 onChange={this.handleTitle}
               />
               <input
-                style={{ height: "150px", fontSize: "19px" }}
+                style={{ height: "200px", fontSize: "17px" }}
                 type="text"
                 name="postBody"
                 value={this.state.postData.postBody}
