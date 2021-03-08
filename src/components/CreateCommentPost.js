@@ -10,7 +10,7 @@ class CreateCommentPost extends Component {
     content: "",
   }
 
-  componentDillMount = async () => {
+  componentDidMount = async () => {
     await Auth.currentUserInfo().then((user) => {
       this.setState({
         commentOwnerId: user.attributes.sub,
