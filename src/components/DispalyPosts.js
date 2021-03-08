@@ -13,11 +13,14 @@ import {
 import CreateCommentPost from "./CreateCommentPost"
 import CommentPost from "./CommentPost"
 import { FaThumbsUp } from "react-icons/fa"
+import { createLike } from "../graphql/mutations"
 
 class DisplayPosts extends Component {
   state = {
     ownerId: "",
     onwerUsername: "",
+    errorMessage: "",
+    postLikedBy: [],
     isHovering: false,
     posts: [],
   }
@@ -139,26 +142,49 @@ class DisplayPosts extends Component {
     return false
   }
 
+  handleLike = async (postId) => {
+    const input = {
+      numberLikes: 1,
+      likeOwnerId: this.state.ownerId,
+      likeOwnerUsername: this.state.ownerUsername,
+      likePostId: postId,
+    }
+    try {
+      const result = await API.graphql(graphqlOperation(createLike, { input }))
+
+      console.log(result)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   render() {
     const { posts } = this.state
+
+    let loggedInUser = this.state.ownerId
+
     return posts.map((post) => {
       return (
         <div className="posts" style={rowStyle} key={post.id}>
           <h1>{post.postTitle}</h1>
           <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
-            {"Written By: "}
-            {post.postOwnerUsername}
-            {" on "}
+            {"Written By: " + post.postOwnerUsername + " on "}
             <time style={{ fontStyle: "italic" }}>
-              {" "}
-              {new Date(post.createdAt).toDateString()}
+              {" " + new Date(post.createdAt).toDateString()}
             </time>
           </span>
           <p>{post.postBody}</p>
           <br />
           <span>
-            <DeletePost data={post} />
-            <EditPost {...post} />
+            {post.postOwnerId === loggedInUser && <DeletePost data={post} />}
+            {post.postOwnerId == loggedInUser && <EditPost {...post} />}
+
+            <span>
+              <p onClick={() => this.handleLike(post.id)}>
+                <FaThumbsUp />
+                {" " + post.likes.items.length}
+              </p>
+            </span>
           </span>
           <span>
             <CreateCommentPost postId={post.id} />
