@@ -1,23 +1,35 @@
 import React, { Component } from "react"
 import { listPosts } from "../graphql/queries"
-import { API, graphqlOperation } from "aws-amplify"
+import { API, Auth, graphqlOperation } from "aws-amplify"
 import DeletePost from "./DeletePost"
 import EditPost from "./EditPost"
 import {
   onCreateComment,
+  onCreateLike,
   onCreatePost,
   onDeletePost,
   onUpdatePost,
 } from "../graphql/subscriptions"
 import CreateCommentPost from "./CreateCommentPost"
 import CommentPost from "./CommentPost"
+import { FaThumbsUp } from "react-icons/fa"
 
 class DisplayPosts extends Component {
   state = {
+    ownerId: "",
+    onwerUsername: "",
+    isHovering: false,
     posts: [],
   }
   componentDidMount = async () => {
     this.getPosts()
+
+    await Auth.currentUserInfo().then((user) => {
+      this.setState({
+        ownerId: user.attributes.sub,
+        ownerUsername: user.username,
+      })
+    })
 
     this.createPostListener = API.graphql(
       graphqlOperation(onCreatePost)
@@ -79,6 +91,23 @@ class DisplayPosts extends Component {
         this.setState({ posts })
       },
     })
+
+    this.createPostLikeListener = API.graphql(
+      graphqlOperation(onCreateLike)
+    ).subscribe({
+      next: (postData) => {
+        const createdLike = postData.value.data.onCreateLike
+
+        let posts = [...this.state.posts]
+        for (let post of posts) {
+          if (createdLike.post.id === post.id) {
+            post.likes.items.push(createdLike)
+          }
+        }
+
+        this.setState({ posts })
+      },
+    })
   }
 
   componentDidMount() {
@@ -86,12 +115,28 @@ class DisplayPosts extends Component {
     this.deletePostListener.unsubscribe()
     this.updatePostListener.unsubscribe()
     this.createPostCommentListener.unsubscribe()
+    this.createPostLikeListener.unsubscribe()
   }
 
   getPosts = async () => {
     const result = await API.graphql(graphqlOperation(listPosts))
 
     this.setState({ posts: result.data.listPosts.items })
+  }
+
+  likedPost = (postId) => {
+    for (let post of this.state.posts) {
+      if (post.id === postId) {
+        if (post.postOwnerId === this.state.ownerId) return true
+        for (let like of post.likes.items) {
+          if (like.likeOwnerId === this.state.ownerId) {
+            return true
+          }
+        }
+      }
+    }
+
+    return false
   }
 
   render() {
