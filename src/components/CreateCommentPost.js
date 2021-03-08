@@ -47,7 +47,6 @@ class CreateCommentPost extends Component {
             type="text"
             name="content"
             rows="3"
-            cols="40"
             required
             placeholder="Comment..."
             value={this.state.content}

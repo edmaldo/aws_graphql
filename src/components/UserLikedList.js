@@ -5,11 +5,9 @@ class UserLikedList extends Component {
     const allUsers = this.props.data
     return allUsers.map((user) => {
       return (
-        <>
-          <div key={user}>
-            <span style={{ fontStyle: "bold", color: "#ged" }}>{user}</span>
-          </div>
-        </>
+        <div key={user}>
+          <span style={{ fontStyle: "bold", color: "#ged" }}>{user}</span>
+        </div>
       )
     })
   }

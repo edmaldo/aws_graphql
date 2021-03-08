@@ -186,15 +186,14 @@ class DisplayPosts extends Component {
     return posts.map((post) => {
       return (
         <div className="posts" style={rowStyle} key={post.id}>
-          <h1>{post.postTitle}</h1>
-          <span style={{ fontStyle: "italic", color: "#0ca5e297" }}>
+          <h1 className="post-title">{post.postTitle}</h1>
+          <span style={{ fontStyle: "italic", color: "#407294" }}>
             {"Written By: " + post.postOwnerUsername + " on "}
             <time style={{ fontStyle: "italic" }}>
               {" " + new Date(post.createdAt).toDateString()}
             </time>
           </span>
-          <p>{post.postBody}</p>
-          <br />
+          <p className="post-body">{post.postBody}</p>
           <span>
             {post.postOwnerId === loggedInUser && <DeletePost data={post} />}
             {post.postOwnerId == loggedInUser && <EditPost {...post} />}

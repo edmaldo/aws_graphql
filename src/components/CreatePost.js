@@ -55,7 +55,7 @@ class CreatePost extends Component {
         <textarea
           type="text"
           name="postBody"
-          rows="3"
+          rows="7"
           cols="40"
           required
           placeholder="New Blog Post"

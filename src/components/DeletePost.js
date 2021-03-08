@@ -16,7 +16,7 @@ class DeletePost extends Component {
     return (
       <button
         onClick={() => this.handleDeletePost(post.id)}
-        style={{ backgroundColor: "red" }}
+        style={{ backgroundColor: "#CC0000" }}
       >
         Delete
       </button>
