@@ -31,7 +31,7 @@ class CreateCommentPost extends Component {
       commentOwnerId: this.state.commentOwnerId,
       commentOwnerUsername: this.state.commentOwnerUsername,
       content: this.state.content,
-      createAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     }
 
     await API.graphql(graphqlOperation(createComment, { input }))
