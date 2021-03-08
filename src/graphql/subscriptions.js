@@ -35,7 +35,7 @@ export const onCreatePost = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onUpdatePost = /* GraphQL */ `
   subscription OnUpdatePost {
     onUpdatePost {
@@ -70,7 +70,7 @@ export const onUpdatePost = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onDeletePost = /* GraphQL */ `
   subscription OnDeletePost {
     onDeletePost {
@@ -105,7 +105,7 @@ export const onDeletePost = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment {
     onCreateComment {
@@ -120,9 +120,22 @@ export const onCreateComment = /* GraphQL */ `
         postBody
         createdAt
         comments {
+          items {
+            id
+            commentOwnerId
+            commentOwnerUsername
+            content
+            createdAt
+          }
           nextToken
         }
         likes {
+          items {
+            id
+            numberLikes
+            likeOwnerId
+            likeOwnerUsername
+          }
           nextToken
         }
         updatedAt
@@ -132,7 +145,7 @@ export const onCreateComment = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment {
     onUpdateComment {
@@ -147,6 +160,13 @@ export const onUpdateComment = /* GraphQL */ `
         postBody
         createdAt
         comments {
+          items {
+            id
+            commentOwnerId
+            commentOwnerUsername
+            content
+            createdAt
+          }
           nextToken
         }
         likes {
@@ -159,7 +179,7 @@ export const onUpdateComment = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment {
     onDeleteComment {
@@ -174,11 +194,19 @@ export const onDeleteComment = /* GraphQL */ `
         postBody
         createdAt
         comments {
+          items {
+            id
+            commentOwnerId
+            commentOwnerUsername
+            content
+            createdAt
+          }
           nextToken
         }
         likes {
           nextToken
         }
+        createdAt
         updatedAt
       }
       content
@@ -186,7 +214,7 @@ export const onDeleteComment = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const onCreateLike = /* GraphQL */ `
   subscription OnCreateLike {
     onCreateLike {
@@ -207,13 +235,14 @@ export const onCreateLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
     }
   }
-`;
+`
 export const onUpdateLike = /* GraphQL */ `
   subscription OnUpdateLike {
     onUpdateLike {
@@ -234,13 +263,14 @@ export const onUpdateLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
     }
   }
-`;
+`
 export const onDeleteLike = /* GraphQL */ `
   subscription OnDeleteLike {
     onDeleteLike {
@@ -261,10 +291,11 @@ export const onDeleteLike = /* GraphQL */ `
         likes {
           nextToken
         }
+        createdAt
         updatedAt
       }
       createdAt
       updatedAt
     }
   }
-`;
+`

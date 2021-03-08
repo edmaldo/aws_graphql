@@ -35,7 +35,7 @@ export const getPost = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const listPosts = /* GraphQL */ `
   query ListPosts(
     $filter: ModelPostFilterInput
@@ -51,9 +51,22 @@ export const listPosts = /* GraphQL */ `
         postBody
         createdAt
         comments {
+          items {
+            id
+            commentOwnerId
+            commentOwnerUsername
+            content
+            createdAt
+          }
           nextToken
         }
         likes {
+          items {
+            id
+            numberLikes
+            likeOwnerId
+            likeOwnerUsername
+          }
           nextToken
         }
         updatedAt
@@ -61,7 +74,7 @@ export const listPosts = /* GraphQL */ `
       nextToken
     }
   }
-`;
+`
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
@@ -88,7 +101,7 @@ export const getComment = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const listComments = /* GraphQL */ `
   query ListComments(
     $filter: ModelCommentFilterInput
@@ -116,7 +129,7 @@ export const listComments = /* GraphQL */ `
       nextToken
     }
   }
-`;
+`
 export const getLike = /* GraphQL */ `
   query GetLike($id: ID!) {
     getLike(id: $id) {
@@ -143,7 +156,7 @@ export const getLike = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const listLikes = /* GraphQL */ `
   query ListLikes(
     $filter: ModelLikeFilterInput
@@ -171,4 +184,4 @@ export const listLikes = /* GraphQL */ `
       nextToken
     }
   }
-`;
+`

@@ -10,7 +10,7 @@ import {
   onUpdatePost,
 } from "../graphql/subscriptions"
 import CreateCommentPost from "./CreateCommentPost"
-import { createComment } from "../graphql/mutations"
+import CommentPost from "./CommentPost"
 
 class DisplayPosts extends Component {
   state = {
@@ -72,7 +72,7 @@ class DisplayPosts extends Component {
 
         for (let post of posts) {
           if (createdComment.post.id === post.id) {
-            post.comments.items.push(createComment)
+            post.comments.items.push(createdComment)
           }
         }
 
@@ -115,8 +115,15 @@ class DisplayPosts extends Component {
             <DeletePost data={post} />
             <EditPost {...post} />
           </span>
-          <CreateCommentPost postId={post.id} />
-          <span></span>
+          <span>
+            <CreateCommentPost postId={post.id} />
+            {post.comments.items.length > 0 && (
+              <span style={{ fontSize: "19px", color: "gray" }}>Comments:</span>
+            )}
+            {post.comments.items.map((comment, index) => (
+              <CommentPost key={index} commentData={comment} />
+            ))}
+          </span>
         </div>
       )
     })
