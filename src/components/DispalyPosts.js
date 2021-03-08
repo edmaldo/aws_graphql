@@ -12,16 +12,14 @@ import {
 } from "../graphql/subscriptions"
 import CreateCommentPost from "./CreateCommentPost"
 import CommentPost from "./CommentPost"
-import { FaPoo, FaThumbsUp } from "react-icons/fa"
+import { FaThumbsUp } from "react-icons/fa"
 import { createLike } from "../graphql/mutations"
-import UserLikedList from "./UserLikedList"
 
 class DisplayPosts extends Component {
   state = {
     ownerId: "",
     onwerUsername: "",
-    postLikedBy: [],
-    isHovering: false,
+    errorMessage: "",
     posts: [],
   }
   componentDidMount = async () => {
@@ -143,39 +141,21 @@ class DisplayPosts extends Component {
   }
 
   handleLike = async (postId) => {
-    const input = {
-      numberLikes: 1,
-      likeOwnerId: this.state.ownerId,
-      likeOwnerUsername: this.state.ownerUsername,
-      likePostId: postId,
-    }
-    try {
-      const result = await API.graphql(graphqlOperation(createLike, { input }))
-
-      console.log(result)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  handleMouseHover = async (postId) => {
-    this.setState({ isHovering: !this.state.isHovering })
-
-    let innerLikes = this.state.postLikedBy
-    for (let post of this.state.posts) {
-      if (post.id === postId) {
-        for (let like of post.likes.items) {
-          innerLikes.push(like.likeOwnerUsername)
-        }
+    if (this.likedPost(postId)) {
+      return this.setState({ errorMessage: "Others must like your post" })
+    } else {
+      const input = {
+        numberLikes: 1,
+        likeOwnerId: this.state.ownerId,
+        likeOwnerUsername: this.state.ownerUsername,
+        likePostId: postId,
       }
-
-      this.setState({ postLikedBy: innerLikes })
+      try {
+        await API.graphql(graphqlOperation(createLike, { input }))
+      } catch (error) {
+        console.error(error)
+      }
     }
-  }
-
-  handleMouseLeave = async () => {
-    this.setState({ isHovering: !this.state.isHovering })
-    this.setState({ postLikedBy: [] })
   }
 
   render() {
@@ -196,15 +176,13 @@ class DisplayPosts extends Component {
           <p className="post-body">{post.postBody}</p>
           <span>
             {post.postOwnerId === loggedInUser && <DeletePost data={post} />}
-            {post.postOwnerId == loggedInUser && <EditPost {...post} />}
+            {post.postOwnerId === loggedInUser && <EditPost {...post} />}
 
             <span>
               <p className="alert">
                 {post.postOwnerId === loggedInUser && this.state.errorMessage}
               </p>
               <p
-                onMouseEnter={() => this.handleMouseHover(post.id)}
-                onMouseLeave={() => this.handleMouseLeave()}
                 onClick={() => this.handleLike(post.id)}
                 style={{ color: post.likes.items.length > 0 ? "blue" : "gray" }}
                 className="like-button"
@@ -212,16 +190,6 @@ class DisplayPosts extends Component {
                 <FaThumbsUp />
                 {" " + post.likes.items.length}
               </p>
-              {this.state.isHovering && (
-                <div className="users-liked">
-                  {this.state.postLikedBy.length === 0 ? "0 Likes " : "Likes: "}
-                  {this.state.postLikedBy.length === 0 ? (
-                    <FaPoo />
-                  ) : (
-                    <UserLikedList data={this.state.postLikedBy} />
-                  )}
-                </div>
-              )}
             </span>
           </span>
           <span>
